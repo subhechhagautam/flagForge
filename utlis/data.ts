@@ -84,6 +84,5 @@ export const initialQuestion: Questions = {
   category: "",
   points: 0,
   flag: "",
-  link: "",
   isSolved: false,
 };

@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Loading from "@/components/loading";
 import { Questions } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import AuthError from "@/components/authError";
 import { initialQuestion } from "@/utlis/data";
 
-const Page = ({ params }: any) => {
+const Page = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const { status: sessionStatus, data: session } = useSession();
   const [problems, setProblems] = useState<Questions>(initialQuestion);
@@ -14,7 +14,7 @@ const Page = ({ params }: any) => {
   const [message, setMessage] = useState<string | null>(null); // State for success/error message
 
   // Fetch problem data
-  const fetchProblems = async () => {
+  const fetchProblems = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/problems/${params.id}`);
@@ -22,18 +22,18 @@ const Page = ({ params }: any) => {
         throw new Error("Failed to fetch problems");
       }
       const data = await response.json();
-      if (data.question) {
+      if (data && data.question) {
         setProblems(data.question);
       } else {
         throw new Error("Invalid data format from API");
       }
-      setLoading(false);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching problems:", error);
+      setMessage("Failed to load problem data. Please try again later.");
+    } finally {
       setLoading(false);
-      setMessage("Failed to load problem data.");
     }
-  };
+  }, [params.id]);
 
   // Handle flag submission
   const handleSubmit = async () => {
@@ -54,20 +54,20 @@ const Page = ({ params }: any) => {
       const result = await response.json();
 
       if (response.ok) {
-        setMessage(result.message || "Correct flag!"); // Success message
+        setMessage(result.message || "Correct flag!");
         setProblems((prev) => ({ ...prev, isSolved: true })); // Mark as solved locally
       } else {
         setMessage(result.message || "Incorrect flag. Try again.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error submitting flag:", error);
       setMessage("An error occurred. Please try again.");
     }
   };
 
   useEffect(() => {
     fetchProblems();
-  }, []);
+  }, [fetchProblems]);
 
   if (loading || sessionStatus === "loading") {
     return <Loading />;
@@ -124,6 +124,7 @@ const Page = ({ params }: any) => {
             value={flag}
             onChange={(e) => setFlag(e.target.value)}
             disabled={problems.isSolved}
+            aria-label="Flag Input"
           />
           <button
             className={`bg-rose-500 w-full sm:w-[180px] border border-rose-500 hover:bg-rose-800 rounded-xl px-4 py-2 text-white ${
