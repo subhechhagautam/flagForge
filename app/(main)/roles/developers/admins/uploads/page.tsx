@@ -10,7 +10,7 @@ const Page = () => {
     description: "",
     points: "",
     category: "All",
-    resourceLink: "",
+    link: "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -41,7 +41,7 @@ const Page = () => {
           description: "",
           points: "",
           category: "All",
-          resourceLink: "",
+          link: "",
         });
         router.push("/problems"); // Redirect to problems page
       } else {
@@ -150,7 +150,7 @@ const Page = () => {
               id="resourceLink"
               type="text"
               placeholder="link here"
-              value={formData.resourceLink}
+              value={formData.link}
               onChange={handleChange}
               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
