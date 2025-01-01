@@ -22,11 +22,16 @@ const Page = ({ params }: any) => {
         throw new Error("Failed to fetch problems");
       }
       const data = await response.json();
-      setProblems(data.question);
+      if (data.question) {
+        setProblems(data.question);
+      } else {
+        throw new Error("Invalid data format from API");
+      }
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
+      setMessage("Failed to load problem data.");
     }
   };
 
@@ -49,10 +54,10 @@ const Page = ({ params }: any) => {
       const result = await response.json();
 
       if (response.ok) {
-        setMessage(result.message); // Success message
+        setMessage(result.message || "Correct flag!"); // Success message
         setProblems((prev) => ({ ...prev, isSolved: true })); // Mark as solved locally
       } else {
-        setMessage(result.message || "An error occurred"); // Error message
+        setMessage(result.message || "Incorrect flag. Try again.");
       }
     } catch (error) {
       console.error(error);
@@ -79,15 +84,15 @@ const Page = ({ params }: any) => {
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl sm:text-3xl flex items-center justify-center gap-2 text-black font-bold">
-              {problems.title}
+              {problems.title || "Unknown Problem"}
               <span className="text-sm hidden sm:block px-[0.4rem] py-[0.18rem] shadow-xl text-center font-normal bg-rose-500 rounded-lg text-white hover:bg-rose-700">
-                {problems.category}
+                {problems.category || "N/A"}
               </span>
             </h1>
             <h2 className="text-xl hidden sm:block">
               Points:{" "}
               <span className="text-rose-500 font-extrabold">
-                {problems.points}
+                {problems.points || 0}
               </span>
             </h2>
           </div>
@@ -95,7 +100,7 @@ const Page = ({ params }: any) => {
         </div>
         <div className="mt-8 text-lg flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">Description</h1>
-          <h2>{problems.description}</h2>
+          <h2>{problems.description || "No description provided."}</h2>
         </div>
         <div className="mt-8 text-lg flex justify-between gap-4">
           <div className="flex flex-col gap-3">
