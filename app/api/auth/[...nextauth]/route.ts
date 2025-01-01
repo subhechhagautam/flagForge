@@ -40,7 +40,7 @@ const handler = NextAuth({
         }
       }
       // Return false if the provider is not Google
-      return false;
+      return true;
     },
   },
 });
