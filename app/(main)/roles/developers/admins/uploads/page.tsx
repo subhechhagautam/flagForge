@@ -149,7 +149,7 @@ const Page = () => {
     <input
     id="resourceLink"
     type="text"
-    placeholder="https://bingoctf.vercel.app"
+    placeholder="link here"
     value={formData.resourceLink}
     onChange={handleChange}
     className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
