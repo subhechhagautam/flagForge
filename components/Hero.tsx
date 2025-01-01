@@ -8,12 +8,12 @@ const Hero: React.FC = () => {
         <div className="absolute circlePosition w-screen sm:w-[590px] h-[400px] bg-gradient-to-r from-rose-400 rounded-[100%] top-[50%] left-[50%]  blur-[90px] translate-x-[-50%] translate-y-[-50%] z-[-1]" />
         <h2 className=" sm:w-[80%] mx-auto text-[2.6rem] sm:text-6xl text-center  text-gray-600 leading-[51px]  sm:leading-1">
           Welcome to{" "}
-          <span className="text-rose-500 font-extrabold">bingoCTF</span>{" "}
+          <span className="text-rose-500 font-extrabold">flagforge</span>{" "}
           <span className="font-bold">Capture The Flag (CTF)</span>{" "}
           playground!🏆
         </h2>
         <h2 className="w-[98%] sm:w-[75%] mx-auto my-0 text-center text-base sm:text-lg">
-          <span className="text-rose-700 font-extrabold">bingoCTF</span> is a
+          <span className="text-rose-700 font-extrabold">flagforge</span> is a
           dynamic and engaging CTF platform dedicated to promoting{" "}
           <span className="text-rose-700 font-extrabold">Cybersecurity</span>{" "}
           awareness and fostering a passion for coding among participants. Our
@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
         <div className="w-40% mx-auto my-0 flex flex-col gap-3 justify-center shadow-lg p-7 rounded-xl bg-[white]/40 backdrop-blur-[150px]">
           <h1 className="font-extrabold text-2xl">Innovative Challenges 🧿</h1>
           <p>
-            <span className="text-rose-500 font-bold">bingoCTF</span> offers a
+            <span className="text-rose-500 font-bold">flagforge</span> offers a
             variety of innovative challenges that test participants' creativity
             and problem-solving abilities, ensuring an engaging and rewarding
             experience for all.
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
         <div className="w-40% mx-auto my-0 flex flex-col gap-3 justify-center  p-5 rounded-xl shadow-lg bg-[white]/40 backdrop-blur-[150px]">
           <h1 className="font-extrabold text-2xl">Beginner-Friendly 🌐</h1>
           <p>
-            <span className="text-rose-700 font-extrabold">bingoCTF</span>
+            <span className="text-rose-700 font-extrabold">flagforge</span>
             welcomes participants of all skill levels, including beginners. The
             platform offers challenges that cater to newcomers, providing a
             supportive environment for learning and growth.
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
         <div className="w-40% mx-auto my-0 flex flex-col gap-3 justify-center p-5 rounded-xl shadow-lg bg-[white]/40 backdrop-blur-[150px]">
           <h1 className="font-extrabold text-2xl">Improvement 🎁</h1>
           <p>
-            <span className="text-rose-700 font-extrabold">bingoCTF</span>{" "}
+            <span className="text-rose-700 font-extrabold">flagforge</span>{" "}
             regularly updates its challenges and platform based on feedback from
             participants, ensuring that the experience remains relevant and
             engaging.

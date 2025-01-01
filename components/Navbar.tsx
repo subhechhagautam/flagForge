@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
         <Link href="/">
           <div className="flex items-center text-xl font-bold">
             <Image src={logo} alt="logo" height={70} width={70} />
-            bingoCTF
+            flagforge
           </div>
         </Link>
         <div className="sm:hidden" onClick={handleMenuClick}>

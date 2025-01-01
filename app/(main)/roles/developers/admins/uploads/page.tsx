@@ -123,7 +123,7 @@ const page = () => {
               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
               id="grid-zip"
               type="text"
-              placeholder="https://bingoctf.vercel.app"
+              placeholder="https://flagforge.vercel.app"
             />
           </div>
         </div>

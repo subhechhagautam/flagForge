@@ -7,9 +7,9 @@ import Authprovider from "@/providers/auth-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "bingO CTF",
-  description: "bingo CTF - Capture The Flag (CTF)",
-  metadataBase: new URL("https://bingoctf.vercel.app"),
+  title: "Flag Forge",
+  description: "CTF - Capture The Flag (CTF)",
+  metadataBase: new URL("https://flagforge.aryan4.com.np"),
   alternates: {
     canonical: "/",
     languages: {
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     },
   },
 
-  applicationName: "bing CTF",
+  applicationName: "FlagForge CTF",
   referrer: "origin-when-cross-origin",
   keywords: [
   ],
-  authors: [{ name: "@Puskar-Roy", url: "https://github.com/Puskar-Roy" }],
+  authors: [{ name: "@Aryanstha", url: "https://github.com/aryan4859" }],
 };
 
 export default function RootLayout({
