@@ -94,7 +94,7 @@ const Page = ({ params }: any) => {
     <div className="mt-8 text-lg flex justify-between gap-4">
     <div className="flex flex-col gap-3">
     <h1 className="text-xl sm:text-2xl font-semibold">Given Resources</h1>
-    <h2 className="font-bold text-sm sm:text-md text-rose-500">
+    <h2 className="font-bold text-sm sm:text-md text-rose-500"><a href="{problems.link}"></a>
     {problems.link}
     </h2>
     </div>
