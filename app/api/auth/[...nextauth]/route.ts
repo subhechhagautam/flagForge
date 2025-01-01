@@ -4,43 +4,62 @@ import { GoogleProviderConfig } from "@/interfaces";
 import connect from "@/utlis/db";
 import UserModel from "@/models/userSchema";
 
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: 'email profile',  // Ensure email and profile scopes are requested
+        },
+      },
     } as GoogleProviderConfig),
   ],
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider === "google") {
-        await connect();
+      // Log account and user info for debugging
+      console.log('SignIn Callback:', { user, account });
 
+      // Proceed only if the provider is Google
+      if (account?.provider === "google") {
+        await connect(); // Connect to database
+        
         try {
           // Check if user already exists in the database
           const existingUser = await UserModel.findOne({ email: user.email });
-          
+
+          // If user doesn't exist, create a new user
           if (!existingUser) {
-            // If user does not exist, create a new one
             const newUser = new UserModel({
               email: user.email,
               name: user.name,
               image: user.image,
             });
 
+            // Save new user to the database
             await newUser.save();
+            console.log("New user created:", newUser);
+          } else {
+            console.log("Existing user signed in:", existingUser);
           }
-          
-          // Return true if the user is successfully signed in
+
+          // Return true to allow sign-in
           return true;
         } catch (err) {
-          console.log("Error saving user", err);
-          // Return false if there is an error
-          return false;
+          console.log("Error during sign-in:", err);
+          return false; // Prevent sign-in if an error occurs
         }
       }
-      // Return false if the provider is not Google
-      return true;
+      return false; // Block sign-in for other providers
+    },
+    async session({ session, user }) {
+      // Optionally log session data for debugging
+      console.log("Session callback:", { session, user });
+
+      // Optionally you can modify session properties here
+      return session;
     },
   },
 });
