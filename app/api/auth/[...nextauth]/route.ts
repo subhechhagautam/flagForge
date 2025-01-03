@@ -25,7 +25,7 @@ const handler = NextAuth({
       // Proceed only if the provider is Google
       if (account?.provider === "google") {
         await connect(); // Connect to database
-        
+
         try {
           // Check if user already exists in the database
           const existingUser = await UserModel.findOne({ email: user.email });
@@ -54,9 +54,27 @@ const handler = NextAuth({
       }
       return false; // Block sign-in for other providers
     },
-    async session({ session, user }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
+      }
+      return token;
+    },
+    async session({ session, token }) {
       // Optionally log session data for debugging
-      console.log("Session callback:", { session, user });
+      console.log("Session callback:", { session, token });
+
+      if (token) {
+        session.user = {
+          ...session.user,
+          email: token.email,
+          name: token.name,
+          image: token.picture,
+        };
+      }
 
       // Optionally you can modify session properties here
       return session;
