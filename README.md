@@ -55,3 +55,6 @@ For questions or support, contact the maintainer:
 
 - **Email**: contact@aryan4.com.np
 - **GitHub**: [aryan4859](https://github.com/aryan4859)
+
+## Stats
+![Alt](https://repobeats.axiom.co/api/embed/9ef2bc06a806d5a3db1f42f2d177693fee582756.svg "Repobeats analytics image")
