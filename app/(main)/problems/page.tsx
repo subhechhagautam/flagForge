@@ -14,21 +14,50 @@ const page = () => {
   const [problems, setProblems] = useState<Questions[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  type Problem = {
+    _id: string;
+    title: string;
+    description: string;
+    category: string;
+    points: number;
+    link: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    flag?: string; // Optional because we'll omit it
+  };
+  
   const fetchProblems = async () => {
+    setLoading(true); // Start loading state
+  
     try {
-      setLoading(true);
       const response = await fetch(`/api/problems?page=${currentPage}`);
+      
       if (!response.ok) {
-        throw new Error("Failed to fetch problems");
+        const errorDetails = await response.json();
+        throw new Error(errorDetails.message || "Failed to fetch problems");
       }
-      const data = await response.json();
-      setProblems(data.data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
+  
+      const { data }: { data: Problem[] } = await response.json();
+  
+      // Remove the `flag` field from each problem
+      const sanitizedData = data.map(({ flag, ...rest }) => rest);
+  
+      setProblems(sanitizedData); // Update state with sanitized problems
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error fetching problems:", error.message);
+        alert("Unable to fetch problems. Please try again later.");
+      } else {
+        console.error("An unexpected error occurred:", error);
+      }
+    } finally {
+      setLoading(false); // Stop loading state
     }
   };
+  
+  
   useEffect(() => {
     fetchProblems();
   }, [currentPage]);
