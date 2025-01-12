@@ -109,7 +109,7 @@ const Page = ({ params }: any) => {
     <input
     type="text"
     className="py-2 bg-gray-200 px-4 block w-full border-rose-500 rounded-2xl text-base sm:text-lg focus:outline-rose-600"
-    placeholder="Flag Starts With: bingo{}"
+    placeholder="Flag here!"
     value={flag}
     onChange={(e) => setFlag(e.target.value)}
     />
