@@ -15,9 +15,13 @@ const userSchema = new Schema<Users>(
     image: {
       type: String,
     },
-    role:{
-      type:String,
-      default:"User"
+    role: {
+      type: String,
+      default: "User"
+    },
+    totalScore: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: true }

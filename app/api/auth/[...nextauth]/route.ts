@@ -1,11 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { GoogleProviderConfig } from "@/interfaces";
+import { GoogleProviderConfig, Users } from "@/interfaces";
 import connect from "@/utlis/db";
 import UserModel from "@/models/userSchema";
 
-
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -36,6 +35,7 @@ const handler = NextAuth({
               email: user.email,
               name: user.name,
               image: user.image,
+              totalScore: 0
             });
 
             // Save new user to the database
@@ -65,7 +65,6 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       // Optionally log session data for debugging
-      console.log("Session callback:", { session, token });
 
       if (token) {
         session.user = {
@@ -73,13 +72,16 @@ const handler = NextAuth({
           email: token.email,
           name: token.name,
           image: token.picture,
+          // totalScore: token.totalScore || 0
         };
       }
+      // console.log("Session callback:", { session, token });
 
-      // Optionally you can modify session properties here
       return session;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

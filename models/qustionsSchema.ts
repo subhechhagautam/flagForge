@@ -31,6 +31,9 @@ const questionSchema = new Schema<Questions>(
     link: {
       type: String,
     },
+    done: {
+      type: Boolean
+    }
   },
   { timestamps: true }
 );

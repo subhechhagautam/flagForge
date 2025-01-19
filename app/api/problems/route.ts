@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import QuestionModel from "@/models/qustionsSchema";
 import { Questions } from "@/interfaces";
 import { HttpStatusCode } from "axios";
+import userSchema from "@/models/userSchema";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 
 export async function POST(req: NextRequest) {
@@ -12,9 +15,9 @@ export async function POST(req: NextRequest) {
     if (body.title && body.points && body.category && body.flag && body.description) {
       const product = await QuestionModel.create(body);
       console.log(product);
-      
+
       return NextResponse.json(
-        { success:true, message: "Your qustion has been created" },
+        { success: true, message: "Your qustion has been created" },
         { status: HttpStatusCode.Created }
       );
     }
@@ -29,16 +32,29 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-export async function GET(request:NextRequest) {
+export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const qpage = parseInt(searchParams.get("page") ?? "1", 10);
-  const page:number = qpage;
+  const page: number = qpage;
   const limit = 6;
   const startIndex = (page - 1) * limit;
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new Response("Unauthorized", { status: 401 });
+  }
   try {
     await connect();
-    const questions = await QuestionModel.find().skip(startIndex).limit(limit);
-    return NextResponse.json({ data: questions });
+    const questions = await QuestionModel.find().select('-flag').skip(startIndex).limit(limit);
+
+    const user = await userSchema.findOne({ email: session?.user?.email });
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: HttpStatusCode.NotFound }
+      );
+    }
+    return NextResponse.json({ data: questions, totalScore: user.totalScore });
   } catch (error) {
     return NextResponse.json({ error });
   }

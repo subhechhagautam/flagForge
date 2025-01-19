@@ -1,9 +1,11 @@
-import { ReactNode } from "react";
+import { Types } from "mongoose";
+import { HTMLProps, ReactNode } from "react";
 
 export interface NavbarItems {
   href: string;
   tags: string;
   onClick?: () => void;
+  style: HTMLProps<HTMLElement>["className"];
 }
 
 export interface GoogleProviderConfig {
@@ -22,7 +24,7 @@ export interface Users {
   name?: string;
   questionsDone?: string[];
   totalScore?: number;
-  role?:string;
+  role?: string;
 }
 
 export interface Questions {
@@ -32,8 +34,16 @@ export interface Questions {
   points: number;
   flag?: string;
   isSolved?: boolean;
-  addilinks?:string;
-  _id?:string;
-  link?:string;
+  addilinks?: string;
+  done: boolean;
+  _id?: string;
+  link?: string;
   // answeredCorrectly: { type: Boolean; default: false };
+}
+
+export interface UserQuestion {
+  userId: Types.ObjectId,
+  questionId: Types.ObjectId,
+  scoredPoint: number,
+  _id?: string;
 }

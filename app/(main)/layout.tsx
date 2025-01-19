@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const layout = ({children}:{children:React.ReactNode}) => {
-  return <div className="mt-[90px]">{children}</div>;
-}
+const layout = ({ children }: { children: React.ReactNode }) => {
+  return <div className="mt-8">{children}</div>;
+};
 
-export default layout
+export default layout;
