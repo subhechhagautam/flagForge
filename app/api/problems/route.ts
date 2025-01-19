@@ -5,7 +5,7 @@ import { Questions } from "@/interfaces";
 import { HttpStatusCode } from "axios";
 import userSchema from "@/models/userSchema";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 
 
 export async function POST(req: NextRequest) {

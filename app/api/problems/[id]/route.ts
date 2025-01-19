@@ -3,7 +3,7 @@ import connect from "@/utlis/db";
 import QuestionModel from "@/models/qustionsSchema";
 import { HttpStatusCode } from "axios";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import userSchema from "@/models/userSchema";
 import UserQuestionModel from "@/models/userQuestionSchema";
 
