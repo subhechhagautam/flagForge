@@ -1,17 +1,20 @@
-import { NavbarItems , Questions } from "@/interfaces";
+import { NavbarItems, Questions } from "@/interfaces";
 
 export const NavbarData: NavbarItems[] = [
   {
     href: "/",
     tags: "Home",
+    style: undefined
   },
   {
     href: "/problems",
     tags: "Problems",
+    style: undefined
   },
   {
     href: "/leaderboard",
     tags: "Leaderboard",
+    style: undefined
   }
 ];
 
@@ -26,15 +29,16 @@ const ctfQuestions: Questions[] = [
     points: 300,
     flag: "REVERSE_FLAG",
     isSolved: false,
+    done: false
   },
   {
     title: "Web Exploitation",
-    description:
-      "Find the vulnerability in the provided web to retrieve the flag.",
+    description: "Find the vulnerability in the provided web to retrieve the flag.",
     category: "Web Security",
     points: 200,
     flag: "WEB_FLAG",
     isSolved: false,
+    done: false
   },
   {
     title: "Forensics",
@@ -43,6 +47,7 @@ const ctfQuestions: Questions[] = [
     points: 150,
     flag: "FORENSICS_FLAG",
     isSolved: false,
+    done: false
   },
   {
     title: "Crypto Challenge",
@@ -51,15 +56,16 @@ const ctfQuestions: Questions[] = [
     points: 250,
     flag: "CRYPTO_FLAG",
     isSolved: false,
+    done: false
   },
   {
     title: "Steganography",
-    description:
-      "Identify and extract the hidden message from the provided image.",
+    description: "Identify and extract the hidden message from the provided image.",
     category: "Steganography",
     points: 200,
     flag: "STEGANOGRAPHY_FLAG",
     isSolved: false,
+    done: false
   },
   {
     title: "Network Security",
@@ -68,6 +74,7 @@ const ctfQuestions: Questions[] = [
     points: 300,
     flag: "NETWORK_FLAG",
     isSolved: false,
+    done: false
   },
 ];
 
@@ -85,4 +92,5 @@ export const initialQuestion: Questions = {
   points: 0,
   flag: "",
   isSolved: false,
+  done: false
 };
