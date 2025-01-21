@@ -34,9 +34,7 @@ Flag Forge is a simple Capture The Flag (CTF) platform designed to host, manage,
 
 ## Contributors
 
-<a href="https://github.com/aryan4859/flagForge/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=aryan4859/flagForge" />
-</a>
+
 
 
 Contributions are welcome! Please fork the repository, make your changes, and submit a pull request.
