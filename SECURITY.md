@@ -6,7 +6,7 @@ As **Flag Forge** is in its initial release stage, only the latest version is su
 
 | Version | Supported          |  
 | ------- | ------------------ |  
-| 1.0.x   | :white_check_mark: |  
+| 1.0.0   | :white_check_mark: |  
 
 ---
 
@@ -15,7 +15,7 @@ As **Flag Forge** is in its initial release stage, only the latest version is su
 Thank you for helping us maintain the security of **Flag Forge**. If you discover a vulnerability, please report it responsibly by following the steps below:  
 
 1. **Where to report**:  
-   Send an email to our security team at `security@flagforge.com` with the subject line: `Security Vulnerability Report - Flag Forge`.  
+   Send an email to our security team at `contact@aryan4.com.np` with the subject line: `Security Vulnerability Report - Flag Forge`.  
 
 2. **What to include**:  
    - A detailed description of the vulnerability, including steps to reproduce it.  
