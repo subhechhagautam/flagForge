@@ -9,12 +9,15 @@ export async function GET() {
         await connect();
 
         // Fetch all users sorted by totalScore in descending order
-        const users = await User.find({}).sort({ totalScore: -1 }).select("name totalScore");
+        const users = await User.find({})
+            .sort({ totalScore: -1 })
+            .select("name totalScore image");
 
         // Add ranks to the users
         const leaderboard = users.map((user, index) => ({
             name: user.name,
             totalScore: user.totalScore,
+            image: user.image,
             rank: index + 1, // Rank starts from 1
         }));
 
