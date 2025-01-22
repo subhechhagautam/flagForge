@@ -15,6 +15,7 @@ const LeaderboardPage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
     const fetchLeaderboard = async () => {
       try {
         const res = await fetch("/api/leaderboard");
@@ -39,7 +40,10 @@ const LeaderboardPage = () => {
 
     if (sessionStatus === "authenticated") {
       fetchLeaderboard();
-    }
+      intervalId = setInterval(fetchLeaderboard, 2000);
+    } return () => {
+      if (intervalId) clearInterval(intervalId); // Cleanup on unmount
+    };
   }, [sessionStatus]);
 
   if (sessionStatus === "loading" || loading) {
