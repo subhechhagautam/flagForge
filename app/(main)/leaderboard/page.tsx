@@ -8,7 +8,9 @@ import AuthError from "@/components/authError";
 const LeaderboardPage = () => {
   const { status: sessionStatus } = useSession();
 
-  const [leaderboard, setLeaderboard] = useState<{ name: string; totalScore: number; rank: number }[]>([]);
+  const [leaderboard, setLeaderboard] = useState<
+    { name: string; totalScore: number; rank: number; image: string }[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -60,24 +62,24 @@ const LeaderboardPage = () => {
         {leaderboard.length === 0 ? (
           <p className="text-center text-gray-500">No data available</p>
         ) : (
-          <table className="table-auto w-full text-left">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 border-b text-gray-600 font-semibold">Rank</th>
-                <th className="px-4 py-2 border-b text-gray-600 font-semibold">Name</th>
-                <th className="px-4 py-2 border-b text-gray-600 font-semibold">Total Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboard.map((user) => (
-                <tr key={user.rank}>
-                  <td className="px-4 py-2 border-b text-gray-800">{user.rank}</td>
-                  <td className="px-4 py-2 border-b text-gray-800">{user.name}</td>
-                  <td className="px-4 py-2 border-b text-gray-800">{user.totalScore}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {leaderboard.map((user) => (
+              <div
+                key={user.rank}
+                className="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-sm"
+              >
+                <img
+                  src={user.image}
+                  alt={`${user.name}'s avatar`}
+                  className="w-20 h-20 rounded-full object-cover mb-2"
+                />
+                <h2 className="text-lg font-semibold text-gray-800">
+                  {user.name}
+                </h2>
+                <p className="text-sm text-gray-600">Score: {user.totalScore}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
