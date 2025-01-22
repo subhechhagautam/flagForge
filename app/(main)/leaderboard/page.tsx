@@ -79,7 +79,7 @@ const LeaderboardPage = () => {
                   #{user.rank}
                 </span>
                 <img
-                  src={user.image || "/fallback-avatar.png"}
+                  src={user.image}
                   alt={`${user.name}'s avatar`}
                   className="w-20 h-20 rounded-full object-cover mb-2"
                   onError={(e) =>
