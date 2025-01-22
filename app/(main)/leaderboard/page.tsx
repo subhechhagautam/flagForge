@@ -22,7 +22,14 @@ const LeaderboardPage = () => {
           throw new Error("Failed to fetch leaderboard");
         }
         const data = await res.json();
-        setLeaderboard(data);
+        setLeaderboard(
+          data
+            .sort((a: { totalScore: number; }, b: { totalScore: number; }) => b.totalScore - a.totalScore) // Sort by score in descending order
+            .map((user: any, index: number) => ({
+              ...user,
+              rank: index + 1, // Assign rank based on position
+            }))
+        );
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -68,10 +75,16 @@ const LeaderboardPage = () => {
                 key={user.rank}
                 className="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-sm"
               >
+                <span className="text-xl font-bold text-rose-500">
+                  #{user.rank}
+                </span>
                 <img
-                  src={user.image}
+                  src={user.image || "/fallback-avatar.png"}
                   alt={`${user.name}'s avatar`}
                   className="w-20 h-20 rounded-full object-cover mb-2"
+                  onError={(e) =>
+                    (e.currentTarget.src = "/fallback-avatar.png")
+                  }
                 />
                 <h2 className="text-lg font-semibold text-gray-800">
                   {user.name}
