@@ -10,7 +10,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://flagforge.aryan4.com.np", // Replace with your trusted domain
+            value: "https://flagforge.aryan4.com.np",  
           },
           {
             key: "X-Frame-Options",
@@ -28,6 +28,15 @@ const nextConfig = {
           {
             key: "Strict-Transport-Security",
             value: "max-age=31536000; includeSubDomains; preload",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "no-referrer", // Other options: 'strict-origin', 'strict-origin-when-cross-origin'
+          },
+          {
+            key: "Permissions-Policy",
+            value:
+              "geolocation=(), microphone=(), camera=(), payment=()", // Disable specific APIs
           },
         ],
       },
