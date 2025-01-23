@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/loading";
 import AuthError from "@/components/authError";
+import { Crown } from "lucide-react";
 
 const LeaderboardPage = () => {
   const { status: sessionStatus } = useSession();
@@ -15,6 +16,7 @@ const LeaderboardPage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
     const fetchLeaderboard = async () => {
       try {
         const res = await fetch("/api/leaderboard");
@@ -24,7 +26,10 @@ const LeaderboardPage = () => {
         const data = await res.json();
         setLeaderboard(
           data
-            .sort((a: { totalScore: number; }, b: { totalScore: number; }) => b.totalScore - a.totalScore) // Sort by score in descending order
+            .sort(
+              (a: { totalScore: number }, b: { totalScore: number }) =>
+                b.totalScore - a.totalScore
+            ) // Sort by score in descending order
             .map((user: any, index: number) => ({
               ...user,
               rank: index + 1, // Assign rank based on position
@@ -39,7 +44,11 @@ const LeaderboardPage = () => {
 
     if (sessionStatus === "authenticated") {
       fetchLeaderboard();
+      intervalId = setInterval(fetchLeaderboard, 2000);
     }
+    return () => {
+      if (intervalId) clearInterval(intervalId); // Cleanup on unmount
+    };
   }, [sessionStatus]);
 
   if (sessionStatus === "loading" || loading) {
@@ -61,35 +70,49 @@ const LeaderboardPage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center mt-[10vh]">
-      <h1 className="text-3xl sm:text-3xl text-center text-rose-500 font-bold mb-4">
+    <div className="flex flex-col justify-center items-center mt-16 px-8">
+      <h1 className="text-3xl sm:text-3xl tracking-tight text-center text-rose-500 font-bold mb-4">
         Leaderboard
       </h1>
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-4">
+      <div className="w-full max-screen-w-2xl p-4">
         {leaderboard.length === 0 ? (
           <p className="text-center text-gray-500">No data available</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {leaderboard.map((user) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {leaderboard.map((user, index) => (
               <div
                 key={user.rank}
-                className="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-sm"
+                className={`flex flex-col bg-gray-50 rounded-lg px-6 py-5 shadow-lg shadow-gray-100 relative overflow-clip border border-gray-200 ${
+                  index === 0 ? "col-span-full" : ""
+                }`}
               >
-                <span className="text-xl font-bold text-rose-500">
+                <span className="text-xl font-bold text-rose-500 absolute top-2 right-4">
                   #{user.rank}
                 </span>
                 <img
-                  src={user.image}
+                  src={user.image || ""}
                   alt={`${user.name}'s avatar`}
                   className="w-20 h-20 rounded-full object-cover mb-2"
-                  onError={(e) =>
-                    (e.currentTarget.src = "/fallback-avatar.png")
-                  }
+                  // onError={(e) =>
+                  //   (e.currentTarget.src = "/fallback-avatar.png")
+                  // }
                 />
                 <h2 className="text-lg font-semibold text-gray-800">
                   {user.name}
                 </h2>
-                <p className="text-sm text-gray-600">Score: {user.totalScore}</p>
+                <p className="text-sm text-gray-600">
+                  Score: {user.totalScore}
+                </p>
+
+                {index === 0 ? (
+                  <div className="absolute right-0 bottom-0 w-20 h-16 bg-pink-600 [clip-path:polygon(100%_0,0_100%,100%_100%)]">
+                    <div className="absolute right-2 bottom-2">
+                      <Crown color="white" />
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             ))}
           </div>

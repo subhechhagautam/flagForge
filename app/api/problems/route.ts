@@ -25,9 +25,10 @@ export async function POST(req: NextRequest) {
       { message: "Something is missing!" },
       { status: HttpStatusCode.BadRequest }
     );
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error);
     return NextResponse.json(
-      { message: error },
+      { message: error?.message },
       { status: HttpStatusCode.BadRequest }
     );
   }
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const qpage = parseInt(searchParams.get("page") ?? "1", 10);
   const page: number = qpage;
-  const limit = 6;
+  const limit = 10;
   const startIndex = (page - 1) * limit;
   const session = await getServerSession(authOptions);
 

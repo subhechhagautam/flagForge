@@ -60,15 +60,7 @@ const Navbar: React.FC = () => {
               <CgMenuRightAlt className="text-2xl" />
             </SheetTrigger>
             <SheetContent className="w-full">
-              {/* <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader> */}
-
-              <ul className="flex flex-col gap- mt-16">
+              <ul className="flex flex-col gap-1 mt-16">
                 {session.status === "authenticated" ? (
                   NavbarData.map(({ href, tags }: NavbarItems) => (
                     <NavItem

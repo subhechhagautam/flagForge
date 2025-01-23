@@ -1,6 +1,7 @@
 import React from "react";
 import { Questions } from "@/interfaces";
 import Link from "next/link";
+import { Check } from "lucide-react";
 
 const QustionCards = ({
   title,
@@ -13,7 +14,9 @@ const QustionCards = ({
   return (
     <Link
       href={done ? "/" : `/problems/${_id}`}
-      className="w-full h-full bg-[white]/40 backdrop-blur-[150px] mx-auto my-0 flex flex-col gap-4 shadow-lg shadow-gray-200/50 px-6 py-5 rounded-2xl z-2 hover:bg-gray-100/70 border border-gray-200"
+      className={`w-full h-full bg-[white]/40 backdrop-blur-[150px] mx-auto my-0 flex flex-col gap-4 shadow-lg shadow-gray-200/50 px-6 py-5 rounded-2xl z-2 hover:bg-gray-100/70 border border-gray-200 ${
+        done ? "border-green-400 cursor-not-allowed" : ""
+      }`}
     >
       <div className="flex flex-col">
         <h1 className="text-[1.5rem] text-start font-bold tracking-tight line-clamp-2">
