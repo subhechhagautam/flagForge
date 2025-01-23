@@ -4,11 +4,13 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Authprovider from "@/providers/auth-provider";
+import { Analytics } from "@vercel/analytics/react";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Flag Forge",
-  description: "Join FlagForge, the premier Capture The Flag (CTF) platform designed to hone your cybersecurity skills with engaging challenges. Compete, learn, and grow your hacking expertise.",
+  description:
+    "Join FlagForge, the premier Capture The Flag (CTF) platform designed to hone your cybersecurity skills with engaging challenges. Compete, learn, and grow your hacking expertise.",
   metadataBase: new URL("https://flagforge.aryan4.com.np"),
   alternates: {
     canonical: "/",
@@ -71,7 +73,10 @@ export default function RootLayout({
         {/* Ensure critical meta tags for SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
-        <meta name="google-site-verification" content="your-google-verification-code" />
+        <meta
+          name="google-site-verification"
+          content="your-google-verification-code"
+        />
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </head>
@@ -79,6 +84,7 @@ export default function RootLayout({
         <Authprovider>
           <Navbar />
           {children}
+          <Analytics />
           <Footer />
         </Authprovider>
       </body>
