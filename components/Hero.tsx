@@ -17,9 +17,9 @@ const Hero: React.FC = () => {
           playground!🏆
         </h2>
         <h2 className="w-[98%] sm:w-[75%] mx-auto my-0 text-center text-base sm:text-lg">
-          <span className="text-rose-500 font-extrabold">flagforge</span> is a
+          <span className="text-red-500 font-extrabold">flagforge</span> is a
           dynamic and engaging CTF platform dedicated to promoting
-          <span className="text-rose-500 font-extrabold">Cybersecurity</span>
+          <span className="text-red-500 font-extrabold">Cybersecurity</span>
           awareness and fostering a passion for coding among participants. Our
           CTF competition offers a challenging environment for individuals to
           test their skills in cybersecurity 🔒, cryptography 🗝️, web
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           href={status === "authenticated" ? "/problems" : "/authentication"}
           className="mx-auto"
         >
-          <button className="bg-rose-500 hover:bg-rose-700 rounded-lg w-[18rem] px-4 py-4 text-white text-center mx-[auto] my-0 font-bold">
+          <button className="bg-red-500 hover:bg-red-700 rounded-lg w-[18rem] px-4 py-4 text-white text-center mx-[auto] my-0 font-bold">
             Start Solving 🚀
           </button>
         </Link>
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
         <div className="mx-auto my-0 flex flex-col gap-3 justify-center shadow-lg shadow-gray-200/60 border-gray-200/80 border p-7 rounded-xl bg-[white]/40 backdrop-blur-[150px]">
           <h1 className="font-extrabold text-2xl">Innovative Challenges 🧿</h1>
           <p>
-            <span className="text-rose-500 font-bold">flagforge</span> offers a
+            <span className="text-red-500 font-bold">flagforge</span> offers a
             variety of innovative challenges that test participants' creativity
             and problem-solving abilities, ensuring an engaging and rewarding
             experience for all.
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
         <div className="mx-auto my-0 flex flex-col gap-3 justify-center  p-5 rounded-xl shadow-gray-200/60 shadow-lg bg-[white]/40 backdrop-blur-[150px] border-gray-200/80 border">
           <h1 className="font-extrabold text-2xl">Beginner-Friendly 🌐</h1>
           <p>
-            <span className="text-rose-500 font-extrabold">flagforge </span>
+            <span className="text-red-500 font-extrabold">flagforge </span>
             welcomes participants of all skill levels, including beginners. The
             platform offers challenges that cater to newcomers, providing a
             supportive environment for learning and growth.
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
         <div className="mx-auto my-0 flex flex-col gap-3 justify-center p-5 rounded-xl shadow-gray-200/60 shadow-lg bg-[white]/40 backdrop-blur-[150px] border-gray-200/80 border">
           <h1 className="font-extrabold text-2xl">Improvement 🎁</h1>
           <p>
-            <span className="text-rose-500 font-extrabold">flagforge</span>{" "}
+            <span className="text-red-500 font-extrabold">flagforge</span>{" "}
             regularly updates its challenges and platform based on feedback from
             participants, ensuring that the experience remains relevant and
             engaging.
