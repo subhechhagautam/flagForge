@@ -15,6 +15,16 @@ const LeaderboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const getLevel = (score: number): string => {
+    if (score < 200) return "[0x1][Newbie]";
+    if (score < 500) return "[0x2][Scout]";
+    if (score < 1000) return "[0x3][Codebreaker]";
+    if (score < 1500) return "[0x4][Hacker]";
+    if (score < 2000) return "[0x5][Cipher Hunter]";
+    if (score < 3000) return "[0x6][Forger]";
+    return "[0x7][Flag Conqueror]";
+  };
+
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     const fetchLeaderboard = async () => {
@@ -82,9 +92,8 @@ const LeaderboardPage = () => {
             {leaderboard.map((user, index) => (
               <div
                 key={user.rank}
-                className={`flex flex-col bg-gray-50 rounded-lg px-6 py-5 shadow-lg shadow-gray-100 relative overflow-clip border border-gray-200 ${
-                  index === 0 ? "col-span-full" : ""
-                }`}
+                className={`flex flex-col bg-gray-50 rounded-lg px-6 py-5 shadow-lg shadow-gray-100 relative overflow-clip border border-gray-200 ${index === 0 ? "col-span-full" : ""
+                  }`}
               >
                 <span className="text-xl font-bold text-rose-500 absolute top-2 right-4">
                   #{user.rank}
@@ -93,15 +102,15 @@ const LeaderboardPage = () => {
                   src={user.image || ""}
                   alt={`${user.name}'s avatar`}
                   className="w-20 h-20 rounded-full object-cover mb-2"
-                  // onError={(e) =>
-                  //   (e.currentTarget.src = "/fallback-avatar.png")
-                  // }
+                // onError={(e) =>
+                //   (e.currentTarget.src = "/fallback-avatar.png")
+                // }
                 />
                 <h2 className="text-lg font-semibold text-gray-800">
                   {user.name}
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Score: {user.totalScore}
+                  Score: {user.totalScore} <span className="font-medium text-gray-800">{getLevel(user.totalScore)}</span>
                 </p>
 
                 {index === 0 ? (
