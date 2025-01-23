@@ -25,9 +25,11 @@
     "next-videos": "^1.4.1",
     "p5": "^1.11.2",
     "react": "^18",
+    "react-confetti": "^6.2.2",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-loader-spinner": "^6.1.6",
+    "react-use": "^17.6.0",
     "sharp": "^0.33.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"

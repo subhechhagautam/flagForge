@@ -5,6 +5,8 @@ import { Questions } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import AuthError from "@/components/authError";
 import { initialQuestion } from "@/utlis/data";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 const Page = ({ params }: any) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -12,6 +14,8 @@ const Page = ({ params }: any) => {
   const [problems, setProblems] = useState<Questions>(initialQuestion);
   const [flag, setFlag] = useState<string>(""); // State for the flag input
   const [message, setMessage] = useState<string | null>(null); // State for success/error message
+  const [showConfetti, setShowConfetti] = useState<boolean>(false); // State for confetti explosion
+  const { width, height } = useWindowSize(); // Get window dimensions for confetti
 
   // Fetch problem data
   const fetchProblems = async () => {
@@ -45,6 +49,10 @@ const Page = ({ params }: any) => {
 
       if (response.ok) {
         setMessage(result.message); // Success message
+        if (result.message.includes("Right")) {
+          setShowConfetti(true); // Trigger confetti
+          setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 3 seconds
+        }
       } else {
         setMessage(result.message || "An error occurred"); // Error message
       }
@@ -73,7 +81,7 @@ const Page = ({ params }: any) => {
           <div className="flex justify-between items-center">
             <h1 className="text-2xl sm:text-3xl flex items-center justify-center gap-4 text-black font-bold">
               {problems.title}
-              <span className="text-sm hidden sm:block px-2 py-1 shadow-xl text-center  bg-rose-500 rounded-full tracking-tight font-semibold text-white hover:bg-rose-700">
+              <span className="text-sm hidden sm:block px-2 py-1 shadow-xl text-center bg-rose-500 rounded-full tracking-tight font-semibold text-white hover:bg-rose-700">
                 {problems.category}
               </span>
             </h1>
@@ -131,6 +139,16 @@ const Page = ({ params }: any) => {
               >
                 {message}
               </div>
+            )}
+            {/* Show Confetti */}
+            {showConfetti && (
+              <Confetti
+                width={width}
+                height={height}
+                numberOfPieces={150} // Reduce the number of pieces for smoothness
+                gravity={0.3} // Adjust gravity for natural fall
+                wind={0.01} // Add a slight wind effect
+              />
             )}
           </div>
         </div>
