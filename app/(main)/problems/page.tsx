@@ -100,7 +100,7 @@ const page = () => {
       </div>
 
       <div className="mx-auto my-0 flex justify-between">
-        <div className="mx-auto my-0 grid grid-cols-4 items-center gap-4">
+        <div className="mx-auto my-0 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-2 items-center gap-4">
           {problems.map(
             ({
               title,

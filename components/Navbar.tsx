@@ -22,14 +22,17 @@ import {
 
 const NavItem = ({ href, tags, onClick, style }: NavbarItems) => {
   return (
-    <li
-      className={cn(
-        "hover:text-rose-700 hover:bg-gray-100/70 rounded-md",
-        style
-      )}
-      onClick={onClick}
-    >
-      <Link href={href}>{tags}</Link>
+    <li className="w-full md:w-auto">
+      <Link
+        href={href}
+        className={cn(
+          "hover:text-rose-700 hover:bg-gray-100/70 rounded-md w-full block",
+          style
+        )}
+        onClick={onClick}
+      >
+        {tags}
+      </Link>
     </li>
   );
 };
@@ -60,15 +63,7 @@ const Navbar: React.FC = () => {
               <CgMenuRightAlt className="text-2xl" />
             </SheetTrigger>
             <SheetContent className="w-full">
-              {/* <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader> */}
-
-              <ul className="flex flex-col gap- mt-16">
+              <ul className="flex flex-col gap-1 mt-16">
                 {session.status === "authenticated" ? (
                   NavbarData.map(({ href, tags }: NavbarItems) => (
                     <NavItem
