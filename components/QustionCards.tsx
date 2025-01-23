@@ -11,11 +11,17 @@ const QustionCards = ({
   done,
   _id,
 }: Questions) => {
+  const isDone = done.some(
+    (item: { questionId: string | undefined }) => item.questionId === _id
+  );
+
   return (
     <Link
-      href={done ? "/" : `/problems/${_id}`}
+      href={isDone ? "#" : `/problems/${_id}`}
       className={`w-full h-full bg-[white]/40 backdrop-blur-[150px] mx-auto my-0 flex flex-col gap-4 shadow-lg shadow-gray-200/50 px-6 py-5 rounded-2xl z-2 hover:bg-gray-100/70 border border-gray-200 ${
-        done ? "border-green-400 cursor-not-allowed" : ""
+        isDone
+          ? "border-green-400 cursor-not-allowed bg-gray-100 pointer-events-none grayscale"
+          : ""
       }`}
     >
       <div className="flex flex-col">

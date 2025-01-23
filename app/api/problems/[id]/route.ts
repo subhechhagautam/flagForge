@@ -56,9 +56,9 @@ export async function POST(req: NextRequest, { params }: { params: { id: string;
 
     if (body.flag == question.flag) {
       user.totalScore = (user.totalScore || 0) + question.points;
-      // const userQuestion = await UserQuestionModel.create({ userId: user.id, questionId: params.id, scoredPoint: user.totalScore });
+      const userQuestion = await UserQuestionModel.create({ userId: user.id, questionId: params.id });
 
-      // console.log(userQuestion);
+      await userQuestion.save();
       await user.save();
 
       return NextResponse.json(
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string;
 
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: "An error occurred" },
+      { success: false, message: "An error occured" },
       { status: HttpStatusCode.InternalServerError }
     );
   }

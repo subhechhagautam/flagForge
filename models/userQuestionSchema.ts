@@ -14,16 +14,11 @@ const userQuestionSchema = new Schema<UserQuestion>(
             ref: "Question",
             required: true,
         },
-        scoredPoint: {
-            type: Number,
-            required: true,
-            default: 0
-        }
     },
     { timestamps: true }
 );
 
 const UserQuestionModel =
-    mongoose.models.Question || model("UserQuestion", userQuestionSchema);
+    mongoose.models.UserQuestion || model("UserQuestion", userQuestionSchema);
 
 export default UserQuestionModel;

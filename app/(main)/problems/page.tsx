@@ -15,6 +15,7 @@ const page = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [score, setScore] = useState<number>(0);
+  const [questionDone, setQuestionDone] = useState();
 
   type Problem = {
     _id: string;
@@ -23,7 +24,7 @@ const page = () => {
     category: string;
     points: number;
     link: string;
-    done: boolean;
+    done: any;
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -41,13 +42,18 @@ const page = () => {
         throw new Error(errorDetails.message || "Failed to fetch problems");
       }
 
-      const { data, totalScore }: { data: Problem[]; totalScore: number } =
+      const {
+        data,
+        totalScore,
+        questionDone,
+      }: { data: Problem[]; totalScore: number; questionDone: any } =
         await response.json();
 
       // Remove the `flag` field from each problem
       const sanitizedData = data.map(({ flag, ...rest }) => rest);
       setScore(totalScore);
-      setProblems(sanitizedData); // Update state with sanitized problems
+      setProblems(sanitizedData);
+      setQuestionDone(questionDone);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Error fetching problems:", error.message);
@@ -116,7 +122,7 @@ const page = () => {
                 category={category}
                 points={points}
                 description={description.substring(0, 95)}
-                done={done}
+                done={questionDone}
                 _id={_id}
               />
             )

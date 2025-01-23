@@ -35,7 +35,7 @@ export interface Questions {
   flag?: string;
   isSolved?: boolean;
   addilinks?: string;
-  done: boolean;
+  done: any;
   _id?: string;
   link?: string;
   // answeredCorrectly: { type: Boolean; default: false };

@@ -6,6 +6,7 @@ import { HttpStatusCode } from "axios";
 import userSchema from "@/models/userSchema";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import UserQuestionModel from "@/models/userQuestionSchema";
 
 
 export async function POST(req: NextRequest) {
@@ -55,7 +56,10 @@ export async function GET(request: NextRequest) {
         { status: HttpStatusCode.NotFound }
       );
     }
-    return NextResponse.json({ data: questions, totalScore: user.totalScore });
+
+    const userQuestion = await UserQuestionModel.find({ userId: user.id });
+
+    return NextResponse.json({ data: questions, totalScore: user.totalScore, questionDone: userQuestion });
   } catch (error) {
     return NextResponse.json({ error });
   }

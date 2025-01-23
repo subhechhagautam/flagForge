@@ -29,7 +29,9 @@ const LeaderboardPage = () => {
     let intervalId: NodeJS.Timeout;
     const fetchLeaderboard = async () => {
       try {
-        const res = await fetch("/api/leaderboard");
+        const res = await fetch("/api/leaderboard", {
+          cache: "no-store",
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch leaderboard");
         }
@@ -90,7 +92,12 @@ const LeaderboardPage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {leaderboard.map((user, index) => (
-              <div className={`${index === 0 ? "col-span-full" : ""}`}>
+              <div
+                className={`${index === 0 ? "col-span-full" : ""} ${
+                  index > 4 ? "" : ""
+                }`}
+                key={index}
+              >
                 {user.totalScore > 0 ? (
                   <div
                     key={user.rank}
