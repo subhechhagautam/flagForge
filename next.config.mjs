@@ -16,11 +16,11 @@ const nextConfig = {
             key: "X-Frame-Options",
             value: "DENY",
           },
-          {
+         /* {
             key: "Content-Security-Policy",
             value:
               "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://lh3.googleusercontent.com;",
-          },
+          },*/
           {
             key: "X-Content-Type-Options",
             value: "nosniff",
