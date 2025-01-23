@@ -90,34 +90,42 @@ const LeaderboardPage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {leaderboard.map((user, index) => (
-              <div
-                key={user.rank}
-                className={`flex flex-col bg-gray-50 rounded-lg px-6 py-5 shadow-lg shadow-gray-100 relative overflow-clip border border-gray-200 ${index === 0 ? "col-span-full" : ""
-                  }`}
-              >
-                <span className="text-xl font-bold text-rose-500 absolute top-2 right-4">
-                  #{user.rank}
-                </span>
-                <img
-                  src={user.image || ""}
-                  alt={`${user.name}'s avatar`}
-                  className="w-20 h-20 rounded-full object-cover mb-2"
-                // onError={(e) =>
-                //   (e.currentTarget.src = "/fallback-avatar.png")
-                // }
-                />
-                <h2 className="text-lg font-semibold text-gray-800">
-                  {user.name}
-                </h2>
-                <p className="text-sm text-gray-600">
-                  Score: {user.totalScore} <span className="font-medium text-gray-800">{getLevel(user.totalScore)}</span>
-                </p>
+              <div className={`${index === 0 ? "col-span-full" : ""}`}>
+                {user.totalScore > 0 ? (
+                  <div
+                    key={user.rank}
+                    className={`flex flex-col bg-gray-50 rounded-lg px-6 py-5 shadow-lg shadow-gray-100 relative overflow-clip border border-gray-200`}
+                  >
+                    <span className="text-xl font-bold text-rose-500 absolute top-2 right-4">
+                      #{user.rank}
+                    </span>
+                    <img
+                      src={user.image || ""}
+                      alt={`${user.name}'s avatar`}
+                      className="w-20 h-20 rounded-full object-cover mb-2"
+                      // onError={(e) =>
+                      //   (e.currentTarget.src = "/fallback-avatar.png")
+                      // }
+                    />
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      {user.name}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      Score: {user.totalScore}{" "}
+                      <span className="font-medium text-gray-800">
+                        {getLevel(user.totalScore)}
+                      </span>
+                    </p>
 
-                {index === 0 ? (
-                  <div className="absolute right-0 bottom-0 w-20 h-16 bg-pink-600 [clip-path:polygon(100%_0,0_100%,100%_100%)]">
-                    <div className="absolute right-2 bottom-2">
-                      <Crown color="white" />
-                    </div>
+                    {index === 0 ? (
+                      <div className="absolute right-0 bottom-0 w-20 h-16 bg-pink-600 [clip-path:polygon(100%_0,0_100%,100%_100%)]">
+                        <div className="absolute right-2 bottom-2">
+                          <Crown color="white" />
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ) : (
                   ""
