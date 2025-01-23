@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import logo from "@/public/logo4.png";
+import logo from "@/public/flagforge-logo.png";
 import Image from "next/image";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { IoMdClose } from "react-icons/io";
@@ -24,7 +24,7 @@ const NavItem = ({ href, tags, onClick, style }: NavbarItems) => {
   return (
     <li
       className={cn(
-        "hover:text-rose-700 hover:bg-gray-100/70 rounded-md",
+        "hover:text-red-700 hover:bg-gray-100/70 rounded-md",
         style
       )}
       onClick={onClick}
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
                   <Link
                     onClick={handleMenuClick}
                     href="/authentication"
-                    className="bg-rose-500 hover:bg-rose-800 rounded-lg px-4 py-4 text-white"
+                    className="bg-red-500 hover:bg-red-800 rounded-lg px-4 py-4 text-white"
                   >
                     Sign in / Sign up
                   </Link>
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
                 {session.status === "authenticated" && (
                   <div
                     onClick={handleProfClick}
-                    className="flex gap-2 px-6 py-4 font-bold text-rose-500 items-center cursor-pointer"
+                    className="flex gap-2 px-6 py-4 font-bold text-red-500 items-center cursor-pointer"
                   >
                     <Image
                       src={session.data?.user?.image ?? logo}
@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
               <Link
                 onClick={handleMenuClick}
                 href="/authentication"
-                className="bg-rose-500 hover:bg-rose-800 rounded-lg px-4 py-4 text-white"
+                className="bg-red-500 hover:bg-red-800 rounded-lg px-4 py-4 text-white"
               >
                 Sign in / Sign up
               </Link>
@@ -140,7 +140,7 @@ const Navbar: React.FC = () => {
             {session.status === "authenticated" && (
               <div
                 onClick={handleProfClick}
-                className="flex gap-2 font-bold text-rose-500 items-center cursor-pointer"
+                className="flex gap-2 font-bold text-red-500 items-center cursor-pointer"
               >
                 <Image
                   src={session.data?.user?.image ?? logo}
@@ -205,7 +205,7 @@ const Navbar: React.FC = () => {
               <Link
                 onClick={handleMenuClick}
                 href="/authentication"
-                className="bg-rose-500 hover:bg-rose-700 rounded-lg px-5 py-3 text-white"
+                className="bg-red-500 hover:bg-red-700 rounded-lg px-5 py-3 text-white"
               >
                 Sign in / Sign up
               </Link>
@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
                 <DropdownMenuTrigger>
                   <div
                     onClick={handleProfClick}
-                    className="flex gap-2 font-bold text-rose-500 items-center justify-center  cursor-pointer"
+                    className="flex gap-2 font-bold text-red-500 items-center justify-center  cursor-pointer"
                   >
                     <Image
                       src={session.data?.user?.image ?? logo}

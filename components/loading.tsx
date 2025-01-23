@@ -1,19 +1,17 @@
 import React from "react";
-import { Grid } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner"; // Using Triangle loader
 import Navbar from "./Navbar";
 
 const Loading = () => {
   return (
     <div className="h-[70vh] flex justify-center items-center">
-      <Grid
-        visible={true}
-        height="80"
-        width="80"
+      <Triangle
+        height="125"   // Increased height
+        width="125"    // Increased width
         color="#EB5286"
-        ariaLabel="grid-loading"
-        radius="12.5"
+        ariaLabel="triangle-loading"
         wrapperStyle={{}}
-        wrapperClass="grid-wrapper"
+        wrapperClass="triangle-wrapper"
       />
     </div>
   );

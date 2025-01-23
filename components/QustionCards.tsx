@@ -21,10 +21,10 @@ const QustionCards = ({
         </h1>
         <div className="flex flex-col gap-2 justify-between">
           <h1 className="text-sm sm:text-base font-medium">
-            Points : <span className="text-rose-500">{points}</span>
+            Points : <span className="text-red-700">{points}</span>
           </h1>
           <div className="text-sm sm:text-base font-bold">
-            <span className="text-white text-xs tracking-tight font-bold px-2 py-1 bg-rose-400 rounded-full">
+            <span className="text-white text-xs tracking-tight font-bold px-2 py-1 bg-red-700 rounded-full">
               {category}
             </span>
           </div>
@@ -32,7 +32,7 @@ const QustionCards = ({
       </div>
       <h3 className="font-base font-[0.5rem] text-black line-clamp-2">
         {description}
-        {"..."} <span className="text-rose-500 font-bold">more</span>
+        {"..."} <span className="text-red-700 font-bold">more</span>
       </h3>
     </Link>
   );

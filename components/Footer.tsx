@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/public/logo4.png";
+import logo from "@/public/flagforge-logo.png";
 function Footer() {
   return (
     <footer className="bg-white rounded-lg  m-4">
