@@ -5,8 +5,7 @@ import { Questions } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import AuthError from "@/components/authError";
 import { initialQuestion } from "@/utlis/data";
-import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
+import ConfettiBoom from "react-confetti-boom";
 
 const Page = ({ params }: any) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +14,6 @@ const Page = ({ params }: any) => {
   const [flag, setFlag] = useState<string>(""); // State for the flag input
   const [message, setMessage] = useState<string | null>(null); // State for success/error message
   const [showConfetti, setShowConfetti] = useState<boolean>(false); // State for confetti explosion
-  const { width, height } = useWindowSize(); // Get window dimensions for confetti
 
   // Fetch problem data
   const fetchProblems = async () => {
@@ -51,7 +49,7 @@ const Page = ({ params }: any) => {
         setMessage(result.message); // Success message
         if (result.message.includes("Right")) {
           setShowConfetti(true); // Trigger confetti
-          setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 3 seconds
+          setTimeout(() => setShowConfetti(false), 3000); // Hide confetti after 3 seconds
         }
       } else {
         setMessage(result.message || "An error occurred"); // Error message
@@ -142,12 +140,17 @@ const Page = ({ params }: any) => {
             )}
             {/* Show Confetti */}
             {showConfetti && (
-              <Confetti
-                width={width}
-                height={height}
-                numberOfPieces={150} // Reduce the number of pieces for smoothness
-                gravity={0.3} // Adjust gravity for natural fall
-                wind={0.01} // Add a slight wind effect
+              <ConfettiBoom
+                colors={["#FF6347", "#FFD700", "#00FF00", "#1E90FF", "#FF69B4"]}
+                particleCount={100} // Number of confetti particles
+                shapeSize={30}
+                deg={270}
+                effectCount={Infinity}
+                effectInterval={3000} // Duration of confetti in ms
+                spreadDeg={60}  
+                x={0.5}
+                y={0.5}
+                launchSpeed={1}
               />
             )}
           </div>
