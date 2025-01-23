@@ -15,7 +15,7 @@ const page = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [score, setScore] = useState<number>(0);
-  const [questionDone, setQuestionDone] = useState();
+  const [questionDone, setQuestionDone] = useState<any>();
 
   type Problem = {
     _id: string;
@@ -96,10 +96,19 @@ const page = () => {
         Challenges
       </h1>
       <div className="flex justify-between w-full" onClick={handleMenuClick}>
-        <h2 className="text-center text-xl sm:text-xl font-medium text-gray-600">
-          Score: &nbsp;
-          <span className="text-rose-500 font-extrabold">{score}</span>
-        </h2>
+        <div className="flex justify-between w-full">
+          <h2 className="text-center text-xl sm:text-xl font-medium text-gray-600">
+            Score: &nbsp;
+            <span className="text-rose-500 font-extrabold">{score}</span>
+          </h2>
+          <p className="text-center text-xl sm:text-xl font-medium text-gray-600">
+            Total Question Solved:{" "}
+            <span className="text-rose-500 font-extrabold">
+              {questionDone.length}
+            </span>
+          </p>
+        </div>
+
         <div className="flex gap-2 items-center justify-center text-center text-xl sm:hidden font-medium text-gray-600">
           <IoFilter className="text-2xl" />
         </div>
