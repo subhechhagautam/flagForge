@@ -70,7 +70,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Ensure critical meta tags for SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         <meta
@@ -82,10 +81,12 @@ export default function RootLayout({
       </head>
       <body className={dmSans.className}>
         <Authprovider>
-          <Navbar />
-          {children}
-          <Analytics />
-          <Footer />
+          <div className="mx-auto grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+            <Navbar />
+            {children}
+            <Analytics />
+            <Footer />
+          </div>
         </Authprovider>
       </body>
     </html>

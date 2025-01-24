@@ -102,7 +102,7 @@ const page = () => {
             <span className="text-rose-500 font-extrabold">{score}</span>
           </h2>
           <p className="text-center text-xl sm:text-xl font-medium text-gray-600">
-            Total Question Solved:
+            Total Question Solved:&nbsp;
             <span className="text-rose-500 font-extrabold">
               {questionDone?.length}
             </span>

@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import userSchema from "@/models/userSchema";
 import UserQuestionModel from "@/models/userQuestionSchema";
+import { redirect } from "next/navigation";
+import next from "next";
 
 
 
@@ -13,15 +15,28 @@ export async function GET(
   _: NextRequest,
   { params }: { params: { id: string; }; }
 ) {
+
   try {
     await connect();
-    const qustion = await QuestionModel.findById(params.id);
-    qustion.flag = undefined;
-    if (qustion) {
-      return NextResponse.json({ qustion });
+    const session = await getServerSession(authOptions);
+    const question = await QuestionModel.findById(params.id);
+    question.flag = undefined;
+
+    const user = await userSchema.findOne({ email: session?.user.email });
+
+    const userQuestion = await UserQuestionModel.find({ userId: user.id });
+
+    const isDone = userQuestion.some(
+      (item: { questionId: string; }) =>
+        item.questionId.toString() === params.id
+    );
+
+
+    if (question) {
+      return NextResponse.json({ question, isDone });
     }
     return NextResponse.json(
-      { message: `Product ${params.id} not found` },
+      { message: `Product ${params.id} not found`, isDone: isDone },
       { status: HttpStatusCode.NotFound }
     );
   } catch (error) {
