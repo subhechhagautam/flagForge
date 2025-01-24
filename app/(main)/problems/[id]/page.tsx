@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import doubt from "@/public/doubt.png";
+import ConfettiBoom from "react-confetti-boom";
 
 const Page = ({ params }: any) => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const Page = ({ params }: any) => {
   const [flag, setFlag] = useState<string>(""); // State for the flag input
   const [message, setMessage] = useState<string | null>(null); // State for success/error message
   const [isDone, setIsDone] = useState<boolean>(false);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false); // State for confetti explosion
 
   // Fetch problem data
   const fetchProblems = async () => {
@@ -55,7 +57,10 @@ const Page = ({ params }: any) => {
 
       if (response.ok) {
         setMessage(result.message); // Success message
-        // redirect("/problems");
+        if (result.message.includes("Right")) {
+          setShowConfetti(true); // Trigger confetti
+          setTimeout(() => setShowConfetti(false), 3000); // Hide confetti after 3 seconds
+        }
       } else {
         setMessage(result.message || "An error occurred"); // Error message
       }
@@ -97,7 +102,7 @@ const Page = ({ params }: any) => {
             <div className="flex justify-between items-center">
               <h1 className="text-2xl sm:text-3xl flex items-center justify-center gap-4 text-black font-bold">
                 {problems.title}
-                <span className="text-sm hidden sm:block px-2 py-1 shadow-xl text-center  bg-rose-500 rounded-full tracking-tight font-semibold text-white hover:bg-rose-700">
+                <span className="text-sm hidden sm:block px-2 py-1 shadow-xl text-center bg-rose-500 rounded-full tracking-tight font-semibold text-white hover:bg-rose-700">
                   {problems.category}
                 </span>
               </h1>
@@ -157,6 +162,27 @@ const Page = ({ params }: any) => {
                 >
                   {message}
                 </div>
+              )}
+              {/* Show Confetti */}
+              {showConfetti && (
+                <ConfettiBoom
+                  colors={[
+                    "#FF6347",
+                    "#FFD700",
+                    "#00FF00",
+                    "#1E90FF",
+                    "#FF69B4",
+                  ]}
+                  particleCount={100} // Number of confetti particles
+                  shapeSize={30}
+                  deg={270}
+                  effectCount={Infinity}
+                  effectInterval={3000} // Duration of confetti in ms
+                  spreadDeg={60}
+                  x={0.5}
+                  y={0.5}
+                  launchSpeed={1}
+                />
               )}
             </div>
           </div>
