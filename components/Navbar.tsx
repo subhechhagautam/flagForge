@@ -227,7 +227,7 @@ const Navbar: React.FC = () => {
                   <DropdownMenuItem>
                     <Link
                       className="block w-full whitespace-nowrap bg-transparent text-sm font-normal"
-                      href="#"
+                      href="/profile"
                     >
                       Profile
                     </Link>
