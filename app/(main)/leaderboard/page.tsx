@@ -10,7 +10,13 @@ const LeaderboardPage = () => {
   const { status: sessionStatus } = useSession();
 
   const [leaderboard, setLeaderboard] = useState<
-    { name: string; totalScore: number; rank: number; image: string }[]
+    {
+      name: string;
+      totalScore: number;
+      rank: number;
+      image: string;
+      question: any;
+    }[]
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -114,14 +120,15 @@ const LeaderboardPage = () => {
                       //   (e.currentTarget.src = "/fallback-avatar.png")
                       // }
                     />
+                    <span className="font-medium text-sm text-rose-400">
+                      {getLevel(user.totalScore)}
+                    </span>
                     <h2 className="text-lg font-semibold text-gray-800">
                       {user.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      Score: {user.totalScore}{" "}
-                      <span className="font-medium text-gray-800">
-                        {getLevel(user.totalScore)}
-                      </span>
+                      Score: {user.totalScore}| Questions:{" "}
+                      {user.question.length}
                     </p>
 
                     {index === 0 ? (
