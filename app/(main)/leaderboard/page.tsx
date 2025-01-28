@@ -127,8 +127,7 @@ const LeaderboardPage = () => {
                       {user.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      Score: {user.totalScore}| Questions:{" "}
-                      {user.question.length}
+                      Score: {user.totalScore}
                     </p>
 
                     {index === 0 ? (
