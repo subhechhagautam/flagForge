@@ -84,14 +84,14 @@ export default async function LeaderboardPage() {
                       alt={`${user.name}'s avatar`}
                       className="w-20 h-20 rounded-full object-cover mb-2"
                     />
+                    <span className="font-medium text-sm text-rose-400">
+                      {getLevel(user.totalScore)}
+                    </span>
                     <h2 className="text-lg font-semibold text-gray-800">
                       {user.name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      Score: {user.totalScore}{" "}
-                      <span className="font-medium text-gray-800">
-                        {getLevel(user.totalScore)}
-                      </span>
+                      Score: {user.totalScore}
                     </p>
                     {index === 0 && (
                       <div className="absolute right-0 bottom-0 w-20 h-16 bg-pink-600 [clip-path:polygon(100%_0,0_100%,100%_100%)]">
