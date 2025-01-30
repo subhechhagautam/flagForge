@@ -12,6 +12,8 @@ import Image from "next/image";
 import doubt from "@/public/doubt.png";
 import ConfettiBoom from "react-confetti-boom";
 
+export const runtime = "edge";
+
 const Page = ({ params }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);

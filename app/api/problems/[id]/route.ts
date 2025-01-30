@@ -9,6 +9,7 @@ import UserQuestionModel from "@/models/userQuestionSchema";
 import { redirect } from "next/navigation";
 import next from "next";
 
+export const runtime = 'edge';
 
 
 export async function GET(

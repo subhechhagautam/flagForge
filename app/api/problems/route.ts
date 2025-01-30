@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import UserQuestionModel from "@/models/userQuestionSchema";
 
+export const runtime = 'edge';
 
 export async function POST(req: NextRequest) {
   try {
